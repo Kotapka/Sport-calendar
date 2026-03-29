@@ -1,6 +1,6 @@
 package com.sportcalendar.event.domain;
 
-import com.sportcalendar.competition.Stage;
+import com.sportcalendar.competition.domain.Stage;
 import com.sportcalendar.team.domain.Team;
 import com.sportcalendar.venue.domain.Venue;
 import jakarta.persistence.*;

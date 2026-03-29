@@ -1,4 +1,4 @@
-package com.sportcalendar.competition;
+package com.sportcalendar.competition.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

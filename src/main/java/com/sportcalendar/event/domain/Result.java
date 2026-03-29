@@ -1,8 +1,14 @@
 package com.sportcalendar.event.domain;
 
+import com.sportcalendar.shared.domain.Goal;
+import com.sportcalendar.shared.domain.RedCard;
+import com.sportcalendar.shared.domain.YellowCard;
 import com.sportcalendar.team.domain.Team;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "result")
@@ -32,4 +38,16 @@ public class Result {
     private Team winnerTeam;
 
     private String message;
+
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Goal> goals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<YellowCard> yellowCards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<RedCard> redCards = new ArrayList<>();
 }

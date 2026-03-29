@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-class RedCardDto {
+public class RedCardDto {
     private final String playerName;
     private final Integer minute;
     private final boolean directRed;

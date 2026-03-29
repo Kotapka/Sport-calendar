@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-class GoalDto {
+public class GoalDto {
     private final String playerName;
     private final Integer minute;
     private final String type;

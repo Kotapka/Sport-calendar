@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @Getter
 @Builder
 public class EventResponseDto {
-    private final Long eventId;
+    private final Integer eventId;
     private final Integer season;
     private final String status;
     private final LocalDate dateVenue;

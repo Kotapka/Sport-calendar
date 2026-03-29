@@ -1,5 +1,8 @@
 package com.sportcalendar.event.dto;
 
+import com.sportcalendar.shared.dto.GoalDto;
+import com.sportcalendar.shared.dto.RedCardDto;
+import com.sportcalendar.shared.dto.YellowCardDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,7 +13,7 @@ import java.util.List;
 @Getter
 @Builder
 public class EventDetailResponseDto {
-    private final Long eventId;
+    private final Integer eventId;
     private final Integer season;
     private final String status;
     private final LocalDate dateVenue;
@@ -28,28 +31,4 @@ public class EventDetailResponseDto {
     private final List<GoalDto> goals;
     private final List<YellowCardDto> yellowCards;
     private final List<RedCardDto> redCards;
-}
-
-@Getter
-@Builder
-class GoalDto {
-    private final String playerName;
-    private final Integer minute;
-    private final String type;
-}
-
-@Getter
-@Builder
-class YellowCardDto {
-    private final String playerName;
-    private final Integer minute;
-    private final boolean secondYellow;
-}
-
-@Getter
-@Builder
-class RedCardDto {
-    private final String playerName;
-    private final Integer minute;
-    private final boolean directRed;
 }
