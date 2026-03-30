@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportHub | Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .glass-card { background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(10px); }
+        .transition-all { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        select option { background: #18181b; }
+        @keyframes bounce-in {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-bounce-in { animation: bounce-in 0.4s ease-out forwards; }
+    </style>
+</head>
+<div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3"></div>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen font-sans">
+
+<nav class="border-b border-zinc-800 bg-zinc-950/50 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('events')">
+            <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                <i class="fa-solid fa-trophy text-zinc-950"></i>
+            </div>
+            <span class="text-xl font-black tracking-tighter uppercase">Sport<span class="text-emerald-500">Hub</span></span>
+        </div>
+        <div class="flex gap-8 text-sm font-bold uppercase tracking-widest">
+            <button onclick="showSection('events')" class="hover:text-emerald-400 transition-colors">Schedule</button>
+            <button onclick="showSection('teams')" class="hover:text-blue-400 transition-colors">Clubs</button>
+        </div>
+        <div id="nav-actions"></div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 py-12">
+    <div id="events-section">
+        <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <h2 class="text-5xl font-black mb-2 italic uppercase">Events</h2>
+                <p class="text-zinc-500 font-medium">Manage match results and upcoming fixtures</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Sort by:</span>
+                <select id="event-sort" onchange="loadEvents()" class="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2 text-xs font-bold uppercase outline-none focus:border-emerald-500 transition-all cursor-pointer">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="status">By Status</option>
+                </select>
+            </div>
+        </header>
+        <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <div id="teams-section" class="hidden">
+        <header class="mb-12">
+            <h2 class="text-5xl font-black mb-2 italic uppercase text-blue-500">Clubs</h2>
+            <p class="text-zinc-500 font-medium">Database of registered sports organizations</p>
+        </header>
+        <div id="teams-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    </div>
+</main>
+
+<div id="event-modal" class="hidden fixed inset-0 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center z-50 p-6">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] w-full max-w-xl p-10 shadow-2xl">
+        <h3 id="event-modal-title" class="text-3xl font-black uppercase italic mb-8 text-emerald-500">Match Details</h3>
+        <form id="event-form" class="space-y-6">
+            <input type="hidden" id="eventId">
+            <div class="grid grid-cols-2 gap-6">
+                <input type="date" id="dateVenue" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none">
+                <input type="time" id="timeVenueUtc" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <select id="homeTeamSelect" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none"></select>
+                <select id="awayTeamSelect" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none"></select>
+            </div>
+            <select id="status" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none font-bold text-emerald-500">
+                <option value="scheduled">SCHEDULED</option>
+                <option value="live">LIVE</option>
+                <option value="finished">FINISHED</option>
+            </select>
+            <div id="goals-container" class="grid grid-cols-2 gap-6 hidden">
+                <input type="number" id="homeGoals" min="0" placeholder="Home Goals" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none text-center font-black">
+                <input type="number" id="awayGoals" min="0" placeholder="Away Goals" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none text-center font-black">
+            </div>
+            <div class="flex gap-4 pt-4">
+                <button type="button" onclick="closeModals()" class="flex-1 py-4 text-zinc-500 font-bold uppercase text-xs">Cancel</button>
+                <button type="submit" class="flex-[2] py-4 bg-emerald-500 text-zinc-950 rounded-2xl font-black uppercase tracking-widest transition-all">Save Event</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="team-modal" class="hidden fixed inset-0 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center z-50 p-6">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] w-full max-w-md p-10 shadow-2xl">
+        <h3 id="team-modal-title" class="text-3xl font-black uppercase italic mb-8 text-blue-500">Club Profile</h3>
+        <form id="team-form" class="space-y-6">
+            <input type="hidden" id="teamId">
+            <input type="text" id="tName" placeholder="Club Name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none">
+            <input type="text" id="tOfficialName" placeholder="Official Full Name" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="tAbbr" placeholder="Abbreviation" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none text-center">
+                <input type="text" id="tCountry" placeholder="Country (ISO)" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none text-center">
+            </div>
+            <input type="text" id="tSlug" placeholder="Slug (auto)" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none opacity-40 text-xs" readonly>
+            <div class="flex gap-4 pt-4">
+                <button type="button" onclick="closeModals()" class="flex-1 py-4 text-zinc-500 font-bold uppercase text-xs">Cancel</button>
+                <button type="submit" class="flex-[2] py-4 bg-blue-500 text-zinc-950 rounded-2xl font-black uppercase tracking-widest transition-all">Save Club</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
