@@ -46,18 +46,9 @@ The database follows the **Third Normal Form (3NF)** to ensure data integrity an
 - spring.datasource.url=jdbc:postgresql://localhost:5432/sportradar
 - spring.datasource.username=YOUR_USERNAME_HERE
 - spring.datasource.password=YOUR_PASSWORD_HERE
-
-First Run to create a database and add sample data:
-
-- spring.jpa.hibernate.ddl-auto=create
+- spring.jpa.hibernate.ddl-auto=create-drop
 - spring.sql.init.mode=always
 - spring.jpa.defer-datasource-initialization=true
-
-On other runs change:
-
-- spring.jpa.hibernate.ddl-auto=update
-- spring.sql.init.mode=never
-
 
 ### 3. Launch Backend
 1. Open your terminal in the backend folder.
