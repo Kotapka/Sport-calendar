@@ -1,0 +1,18 @@
+Reflection on AI Collaboration
+
+During the development of this project, I utilized AI tools as a collaborative partner to enhance productivity and explore alternative technical perspectives. My approach was guided by the following principles:
+
+1. Frontend Development:
+As this was primarily a backend-focused exercise, I chose to concentrate my core efforts on the Spring Boot architecture and database integrity. I leveraged AI agents to assist with HTML and CSS layouts. AI is exceptionally efficient at generating boilerplate UI components, which allowed me to deliver a professional interface while remaining focused on the complex backend logic.
+
+2. Debugging and Problem Solving:
+I used AI as an advanced search engine and debugger. When encountering specific stack traces or configuration hurdles, AI provided instant context—often more efficiently than traditional platforms. It served as a "rubber ducking" partner to quickly identify the root cause of issues.
+
+3. Optimization and Learning:
+I frequently consulted AI to review my implementation logic, asking for more optimal or "cleaner" ways to solve specific problems. It was valuable to see my code from a different perspective, helping me understand alternative patterns in Spring Boot and JPA.
+
+4. Critical Verification:
+I maintained a "trust but verify" mindset. I am fully aware that AI can produce hallucinations or suboptimal code. I made sure to manually review and refactor all generated snippets to ensure they aligned with my architectural goals. I learned that blindly following AI-generated fixes can lead to a "spiral of errors," so I used it with caution and technical oversight.
+
+Conclusion:
+AI was a powerful catalyst for this project, acting as a tutor and a productivity booster. However, the final architectural decisions, database normalization, and core business logic remain my own work, validated through manual testing and debugging.
