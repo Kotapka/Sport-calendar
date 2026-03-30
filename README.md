@@ -51,12 +51,15 @@ The database follows the **Third Normal Form (3NF)** to ensure data integrity an
 - spring.jpa.defer-datasource-initialization=true
 
 ### 3. Launch Backend
-1. Open your terminal in the backend folder.
-2. Run the appropriate command:
-   - Windows: mvnw.cmd spring-boot:run
-   - Linux / macOS: chmod +x mvnw && ./mvnw spring-boot:run
-3. Success Check: Look for Started SportradarApplication in the logs. The API will be live at http://localhost:8080
+#### Method A: Using Maven Wrapper (Recommended)
+This method works even if you don't have Maven installed. Open your terminal in the `backend` folder and run:
+* **Windows**: `.\mvnw.cmd spring-boot:run`
+* **Linux / macOS**: `chmod +x mvnw && ./mvnw spring-boot:run`
 
+#### Method B: Using your IDE (IntelliJ / VS Code)
+1. Open the project in your IDE.
+2. Locate the main class: `com.sportcalendar.SportCalendarApplication`.
+3. Right-click and select **Run 'SportCalendarApplication'**.
 ### 4. Launch Frontend
 1. Navigate to the frontend folder.
 2. Open index.html in any modern web browser.
