@@ -50,4 +50,17 @@ public class Result {
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
     @Builder.Default
     private List<RedCard> redCards = new ArrayList<>();
+
+    public void updateScore(Integer home, Integer away) {
+        this.homeGoals = home != null ? home : 0;
+        this.awayGoals = away != null ? away : 0;
+
+        if (this.homeGoals > this.awayGoals) {
+            this.winnerTeam = (event != null) ? event.getHomeTeam() : null;
+        } else if (this.awayGoals > this.homeGoals) {
+            this.winnerTeam = (event != null) ? event.getAwayTeam() : null;
+        } else {
+            this.winnerTeam = null;
+        }
+    }
 }

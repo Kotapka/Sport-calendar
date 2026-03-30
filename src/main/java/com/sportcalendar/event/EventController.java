@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/events")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:63342")
 public class EventController {
 
     private final EventFacade eventFacade;

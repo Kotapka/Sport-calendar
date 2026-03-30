@@ -1,13 +1,15 @@
 package com.sportcalendar.event.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
+@Setter
 @Builder
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class EventResponseDto {
     private final Integer eventId;
     private final Integer season;
